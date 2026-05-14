@@ -1,8 +1,9 @@
+import playwright
 from playwright.sync_api import Playwright
 from configurations.config import Config
 
 class BaseClient:
-    def __init__(self, playwright: Playwright, timeout:float=15_000.):
+    def __init__(self,playwright: Playwright, timeout:float=15_000.):
         '''
         BaseClient() Initializator
         Args:
@@ -11,6 +12,7 @@ class BaseClient:
             timeout: float:=10: Request Timeout in Seconds
         '''
         config = Config()
+        self.playwright = playwright
         self.base_url = config.get_api_baseurl()
         self.timeout = timeout
         self.headers = {"Content-Type": "application/json"}
@@ -24,7 +26,7 @@ class BaseClient:
             request_headers.update(headers)
 
         response = self._request.get(url=url,
-                                     headers=headers,
+                                     headers=request_headers,
                                      **kwargs)
         return response
 

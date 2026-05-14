@@ -3,6 +3,8 @@ import json
 import yaml
 
 class Config:
+    PATH_TO_SCENARIO = pathlib.Path("C:/Users/hp/Documents/FranciscoAlfonzo-Personal/Courses/Learning/Playwright-Rahul-Shetty-Course/features")
+    scenario_file = PATH_TO_SCENARIO / "order_transaction.feature"
    
     PATH = pathlib.Path("C:/Users/hp/Documents/FranciscoAlfonzo-Personal/Courses/Learning/Playwright-Rahul-Shetty-Course/data")
     json_config = PATH / "credentials.json"
