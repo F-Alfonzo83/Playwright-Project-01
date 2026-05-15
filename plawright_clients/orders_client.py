@@ -4,7 +4,7 @@ from plawright_clients.auth_client import AuthClient
 class OrdersClient(BaseClient):
 
     def place_order(self, email, password):
-        payload = {
+        PAYLOAD = {
             "orders": [
                 {
                     "country": "Antarctica",
@@ -14,7 +14,7 @@ class OrdersClient(BaseClient):
             }
         token = AuthClient(self.playwright).auth( email, password)
         place_order = self._post(url="api/ecom/order/create-order",
-                                        data=payload,
+                                        data=PAYLOAD,
                                        headers={"Authorization": token})
         assert place_order.ok
         orderId = place_order.json()["orders"][0]

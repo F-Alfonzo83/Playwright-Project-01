@@ -16,9 +16,9 @@ def user_credentials(request):
 def browser_instance(playwright, request):
     browser_name = request.config.getoption("browser_name")
     if browser_name == "chromium":
-        browser = playwright.chromium.launch(headless=True)
+        browser = playwright.chromium.launch(headless=False)
     elif browser_name == "firefox":
-        browser = playwright.firefox.launch(headless=True)
+        browser = playwright.firefox.launch(headless=False)
     context = browser.new_context()
     page = context.new_page()
     yield page

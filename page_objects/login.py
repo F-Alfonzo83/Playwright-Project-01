@@ -1,5 +1,6 @@
 from configurations.config import Config
 from page_objects.dashboard import DashboadPage
+from page_objects.registration import RegistrationPage
 
 config = Config()
 
@@ -20,3 +21,10 @@ class LoginPage:
         # I know that this will take me to the "Dashboard" page.
         # The idea is to return the page object after the login
         return DashboadPage(self.page)
+
+    def register_new(self):
+        self.page.get_by_text("Register here").click()
+        return RegistrationPage(self.page)
+        
+        
+
