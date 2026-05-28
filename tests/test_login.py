@@ -16,5 +16,13 @@ def test_forgot_password(playwright: Playwright, browser_instance):
     login_page = LoginPage(browser_instance)
     login_page.navigate()
     forgot_password_page = login_page.forgot_password()
-    forgot_password_page.fill_form(email=)
+    forgot_password_page.fill_form(email=user_mail, new_password=user_pass, password_confirmation=user_pass)
     forgot_password_page.submit_form()
+
+def test_negative_forgot_password_not_match(playwright: Playwright, browser_instance):
+    login_page = LoginPage(browser_instance)
+    login_page.navigate()
+    forgot_password_page = login_page.forgot_password()
+    forgot_password_page.fill_form(email=user_mail, new_password=user_pass, password_confirmation=(f"{user_pass}bla"))
+    forgot_password_page.submit_form()
+    forgot_password_page.validate_error()

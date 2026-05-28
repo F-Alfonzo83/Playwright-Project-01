@@ -31,7 +31,9 @@ class LoginPage:
 
     def forgot_password(self):
         self.page.get_by_role("link", name="Forgot password?").click()
-        return ForgotPassword(self.page)
+        forgot_password_page = ForgotPassword(self.page)
+        forgot_password_page.should_be_open()
+        return forgot_password_page
         
         
 
