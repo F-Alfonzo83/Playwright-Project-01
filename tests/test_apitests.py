@@ -31,14 +31,7 @@ def test_create_order_api(playwright: Playwright, browser_instance, user_credent
     order_details = orders_page.select_order(order_id=order_id)
     order_details.verify_order_message()
 
-def test_login_user(playwright: Playwright, browser_instance):
-    login_page = LoginPage(browser_instance)
-    login_page.navigate()
-    login_page.login(username=user_mail, password=user_pass)
 
-def forgot_password(playwright: Playwright, browser_instance):
-    login_page = LoginPage(browser_instance)
-    login_page.navigate()
 
 
 
