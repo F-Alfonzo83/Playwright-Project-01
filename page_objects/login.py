@@ -1,5 +1,6 @@
 from configurations.config import Config
 from page_objects.dashboard import DashboadPage
+from page_objects.forgot_password import ForgotPassword
 from page_objects.registration import RegistrationPage
 
 config = Config()
@@ -24,7 +25,13 @@ class LoginPage:
 
     def register_new(self):
         self.page.get_by_text("Register here").click()
-        return RegistrationPage(self.page)
+        registration_page = RegistrationPage(self.page)
+        registration_page.should_be_healthy()
+        return registration_page
+
+    def forgot_password(self):
+        self.page.get_by_role("link", name="Forgot password?").click()
+        return ForgotPassword(self.page)
         
         
 
