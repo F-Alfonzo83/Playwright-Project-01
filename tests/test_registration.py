@@ -3,7 +3,8 @@ from playwright.sync_api import Playwright
 from page_objects.login import LoginPage
 
 
-def test_register_user(playwright: Playwright,browser_instance):
+def \
+        test_register_user(playwright: Playwright,browser_instance):
     login_page = LoginPage(browser_instance)
     login_page.navigate()
     register_page =login_page.register_new()
@@ -35,7 +36,7 @@ def test_register_user_success_page(playwright: Playwright, browser_instance):
     register_page.submit_registration()
     register_page.verify_registration_success()
 
-@pytest.mark("negative_scenario")
+
 def test_register_same_user(playwright: Playwright, browser_instance):
     login_page = LoginPage(browser_instance)
     login_page.navigate()

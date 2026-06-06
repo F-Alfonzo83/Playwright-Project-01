@@ -11,7 +11,7 @@ class ForgotPassword:
     def fill_form(self, email:str, new_password:str, password_confirmation:str):
         self.page.get_by_placeholder("Enter your email address") .fill(email)
         self.page.get_by_role("textbox", name= "Passsword").fill(new_password)
-        self.page.get_by_placeholder("Confirm Passsword").fill(new_password)
+        self.page.get_by_placeholder("Confirm Passsword").fill(password_confirmation)
     def submit_form(self):
         #Click Save Password
         self.page.get_by_role("button", name="Save New Password").click()
