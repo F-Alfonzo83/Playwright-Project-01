@@ -10,7 +10,9 @@ user_mail,user_pass = config.get_credentials_main()
 def test_login_user(playwright: Playwright, browser_instance):
     login_page = LoginPage(browser_instance)
     login_page.navigate()
-    login_page.login(username=user_mail, password=user_pass)
+    login_page.should_be_open()
+    login_page.fill_form(username=user_mail, password=user_pass)
+    login_page.submit_login()
 
 def test_forgot_password(playwright: Playwright, browser_instance):
     login_page = LoginPage(browser_instance)
