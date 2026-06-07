@@ -4,6 +4,9 @@ class ForgotPassword:
     """Page Object Model for the Forgot Password Page."""
     def __init__(self, page):
         self.page =  page
+        self.email_field = self.page.get_by_placeholder("Enter your email address")
+        self.password_field = self.page.get_by_role("textbox", name= "Passsword")
+        self.confirm_password_field = self.page.get_by_placeholder("Confirm Passsword")
 
     def should_be_open(self):
         """Verifies that the Forgot Password page is open."""
@@ -18,9 +21,9 @@ class ForgotPassword:
             new_password (str): The new password to enter the forgotten password.
             password_confirmation (str): The confirmation password to enter the forgotten password. Allows for broader testing
         """
-        self.page.get_by_placeholder("Enter your email address") .fill(email)
-        self.page.get_by_role("textbox", name= "Passsword").fill(new_password)
-        self.page.get_by_placeholder("Confirm Passsword").fill(password_confirmation)
+        self.email_field.fill(email)
+        self.password_field.fill(new_password)
+        self.confirm_password_field.fill(password_confirmation)
 
     def submit_form(self):
         """Submits the form"""

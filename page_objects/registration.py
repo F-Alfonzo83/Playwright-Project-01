@@ -13,6 +13,14 @@ class RegistrationPage:
             page (playwright.page.Page): Page Object Model
         """
         self.page = page
+        #Registration Form Fields:
+        self.first_name_field= self.page.get_by_placeholder("First Name")
+        self.last_name_field= self.page.get_by_placeholder("Last Name")
+        self.email_field= self.page.get_by_placeholder("email@example.com")
+        self.phone_number_field = self.page.get_by_placeholder("enter your number")
+        self.password_field= self.page.get_by_role("textbox", name="Passsword")
+        self.confirm_password_field= self.page.get_by_placeholder("Confirm Passsword")
+
 
     def should_be_open(self):
         """Hard Validator for Registration page.
@@ -32,12 +40,12 @@ class RegistrationPage:
         Softly validates that the registration form elements are visible.
         """
 
-        expect.soft(self.page.get_by_placeholder("First Name")).to_be_visible()
-        expect.soft(self.page.get_by_placeholder("Last Name")).to_be_visible()
-        expect.soft(self.page.get_by_placeholder("email@example.com")).to_be_visible()
-        expect.soft(self.page.get_by_placeholder("enter your number")).to_be_visible()
-        expect.soft(self.page.get_by_role("textbox", name="Passsword")).to_be_visible()
-        expect.soft(self.page.get_by_placeholder("Confirm Passsword")).to_be_visible()
+        expect.soft(self.first_name_field).to_be_visible()
+        expect.soft(self.last_name_field).to_be_visible()
+        expect.soft(self.email_field).to_be_visible()
+        expect.soft(self.phone_number_field).to_be_visible()
+        expect.soft(self.password_field).to_be_visible()
+        expect.soft(self.confirm_password_field).to_be_visible()
 
     def should_be_healthy(self):
         """Acts like a wrapper for the Registration Page validators.
@@ -67,12 +75,12 @@ class RegistrationPage:
             """
 
         # Retrieve First name field and input first name, last name, email, phone
-        self.page.get_by_placeholder("First Name").fill(first_name)
-        self.page.get_by_placeholder("Last Name").fill(last_name)
-        self.page.get_by_placeholder("email@example.com").fill(email)
-        self.page.get_by_placeholder("enter your number").fill(phone_number)
-        self.page.get_by_role("textbox", name="Passsword").fill(password)
-        self.page.get_by_placeholder("Confirm Passsword").fill(password)
+        self.first_name_field.fill(first_name)
+        self.last_name_field.fill(last_name)
+        self.email_field.fill(email)
+        self.phone_number_field.fill(phone_number)
+        self.password_field.fill(password)
+        self.confirm_password_field.fill(password)
         #  Select Radio male or female
         self.page.get_by_role("radio",name="Male", exact=True).check()
         # Check the Checkbox

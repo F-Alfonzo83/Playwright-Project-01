@@ -36,7 +36,8 @@ def user_is_on_landing_page(browser_instance):
 def login(username:str, password:str):
 
     login_page = OrderTransaction.login_page
-    dashboard_page = login_page.login(username=username, password= password)
+    login_page.fill_form(username, password)
+    dashboard_page = login_page.submit_login()
     OrderTransaction.dashboard_page = dashboard_page
 
 @when("Navigate to orders page")

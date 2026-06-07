@@ -26,7 +26,8 @@ def test_create_order_api(playwright: Playwright, browser_instance, user_credent
     login_page= LoginPage(browser_instance) #Here you pass the fixture. It returns the page.
     login_page.navigate() ## This will take you to the login page.
 
-    dashboard_page = login_page.login(username=user_mail, password= user_pass)
+    login_page.fill_form(user_mail, user_pass)
+    dashboard_page = login_page.submit_login()
     orders_page = dashboard_page.go_to_orders()
     order_details = orders_page.select_order(order_id=order_id)
     order_details.verify_order_message()

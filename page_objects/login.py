@@ -35,6 +35,13 @@ class LoginPage:
         expect(self.page).to_have_url("https://rahulshettyacademy.com/client/#/auth/login")
         expect(self.page.get_by_role("heading", name= "Log in")).to_be_visible()
 
+    def should_show_login_form(self):
+        """Softly verifies that the login page fields are shown and visible."""
+
+        expect.soft(self.email_field).to_be_visible()
+        expect.soft(self.password_field).to_be_visible()
+        expect.soft(self.login_button).to_be_visible()
+
     def navigate(self):
         self.page.goto(config.get_rahul_url_login())
 

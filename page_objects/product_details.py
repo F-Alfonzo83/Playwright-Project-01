@@ -1,12 +1,26 @@
 from configurations.config import Config
 
 class ProductDetails:
+    """Page Object Model for the Product Details  Page"""
     def __init__(self, page, product_name):
-        conf =  Config()
+        """Initialization of the Product Details Page Object.
+
+        Args:
+            page: Page Object
+            product_name (str): Name of the Product
+        Attributes
+            product_id = Unique ID of the item
+        """
         self.page = page
+        self.product_name = product_name
         self.product_id = self.page.url.split("/")[-1]
 
     def should_be_open(self):
+        """Validates the Product Details Page is properly opened
+
+        Returns:
+
+        """
         # Product Name
         self.page.locator("app-product-details h2").wait_for(state="visible")
         # Product Price
@@ -24,5 +38,5 @@ class ProductDetails:
         # Product Name
         product_name = self.page.locator("app-product-details h2").inner_text()
         # Product Price
-        product_price = self.product_price = self.page.locator("div.col-lg-6.rtl-text h3").inner_text()
+        product_price = self.page.locator("div.col-lg-6.rtl-text h3").inner_text()
         return product_name, product_price

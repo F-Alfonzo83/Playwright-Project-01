@@ -32,9 +32,10 @@ def browser_instance(playwright, request):
 def dashboard_page(browser_instance):
     conf  = Config()
     user, password = conf.get_credentials_main()
+
     login_page = LoginPage(browser_instance)
     login_page.navigate()
-    dashboard_page = login_page.login(username=user,
-                     password=password)
+    login_page.fill_form(user,password)
+    dashboard_page = login_page.submit_login()
     dashboard_page.should_be_open()
     yield dashboard_page
