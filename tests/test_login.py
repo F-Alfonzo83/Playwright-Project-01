@@ -7,8 +7,9 @@ config = Config()
 user_mail,user_pass = config.get_credentials_main()
 
 
-def test_login_user(playwright: Playwright, browser_instance):
-    login_page = LoginPage(browser_instance)
+def test_login_user(browser_instance, session_logger):
+    login_page = LoginPage(browser_instance, session_logger)
+    login_page.navigate()
     login_page.navigate()
     login_page.should_be_open()
     login_page.fill_form(username=user_mail, password=user_pass)

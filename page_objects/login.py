@@ -1,15 +1,19 @@
 from playwright.sync_api import expect
-
 from configurations.config import Config
 from page_objects.dashboard import DashboadPage
 from page_objects.forgot_password import ForgotPassword
+from page_objects.page_object_base import PageObject
 from page_objects.registration import RegistrationPage
 
 config = Config()
 
-class LoginPage:
+class LoginPage(PageObject):
     """Page Object Model for the Login Page."""
-    def __init__(self, page):
+    def __init__(self, page, logger):
+        super().__init__(page, logger)
+
+        self.PAGE_URL = "**/client/#/auth/login"
+        self.PAGE_INDICATOR = self.page.get_by_role("heading", name= "Log in")
         """Initializes the Login Page.
 
         Args:
@@ -20,20 +24,18 @@ class LoginPage:
             password_field (Locator): Locator for the password field.
         """
 
-        self.page = page
-
         self.email_field = self.page.get_by_role("textbox", name="email@example.com")
         self.password_field = self.page.get_by_role("textbox", name="enter your passsword")
 
         self.login_button = self.page.get_by_role("button", name="Login")
-
+    '''
     def should_be_open(self):
         """Validates that the login page is open.
 
         Also allows the items in the page to load
         """
         expect(self.page).to_have_url("https://rahulshettyacademy.com/client/#/auth/login")
-        expect(self.page.get_by_role("heading", name= "Log in")).to_be_visible()
+        expect(self.page.get_by_role("heading", name= "Log in")).to_be_visible()'''
 
     def should_show_login_form(self):
         """Softly verifies that the login page fields are shown and visible."""

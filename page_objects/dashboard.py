@@ -6,7 +6,12 @@ from page_objects.product_details import ProductDetails
 
 class DashboadPage:
     """Page Object Model  for the Dashboard page."""
-    def __init__(self, page):
+    def __init__(self, page, logger):
+        super().__init__(logger, page)
+
+        self.PAGE_URL = "https://rahulshettyacademy.com/client/#/dashboard/dash"
+        self.PAGE_INDICATOR = self.page.get_by_role("heading", name="AUTOMATION")
+
         """Initialize the Dashboard Page Object.
 
         Args:
@@ -16,19 +21,19 @@ class DashboadPage:
             self.product_cards (Playwright Selector): Contains the collection of item product cards
             self.orders_btn (Playwright  selector button): Points to the orders  button
         """
-        self.page = page
+
         self.config = Config()
         self.product_cards =  self.page.locator("section#products>div.container div.row div.card")
         self.orders_btn = self.page.get_by_role("button", name="ORDERS")
 
-    def should_be_open(self):
+    '''def should_be_open(self):
         """Verifies the page has oppenned.
 
         It validates the correct URL and correct header is displayed
         Should be  called first on every test.
         """
         expect(self.page.get_by_role("heading", name="AUTOMATION")).to_be_visible()
-        expect(self.page).to_have_url("https://rahulshettyacademy.com/client/#/dashboard/dash")
+        expect(self.page).to_have_url("https://rahulshettyacademy.com/client/#/dashboard/dash")'''
 
     def go_to_orders(self):
         """Takes the user to the "Order History" page.

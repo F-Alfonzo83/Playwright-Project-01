@@ -1,6 +1,7 @@
 import pytest
 
 from configurations.config import Config
+from configurations.logger import _logger
 from page_objects.login import LoginPage
 
 
@@ -32,10 +33,16 @@ def browser_instance(playwright, request):
 def dashboard_page(browser_instance):
     conf  = Config()
     user, password = conf.get_credentials_main()
+    logger = _logger(__name__)
 
-    login_page = LoginPage(browser_instance)
+    login_page = LoginPage(browser_instance, logger)
     login_page.navigate()
     login_page.fill_form(user,password)
     dashboard_page = login_page.submit_login()
     dashboard_page.should_be_open()
     yield dashboard_page
+
+@pytest.fixture(scope="session")
+def session_logger():
+    logger = _logger(__name__)
+    yield logger
