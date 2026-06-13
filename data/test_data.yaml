@@ -1,0 +1,19 @@
+dashboard:
+  expected_cards: 3
+  product_list:
+    - "ADIDAS ORIGINAL"
+    - "ZARA COAT 3"
+    - "IPHONE 13 PRO"
+order_details:
+  adidas original:
+    itemid: "6960eae1c941646b7a8b3ed3"
+    name: "ADIDAS ORIGINAL"
+    price: "11500"
+  zara coat 3:
+    itemid: "6960eac0c941646b7a8b3e68"
+    name: "ZARA COAT 3"
+    price: "11500"
+  iphone 13 pro:
+    itemid: "6960ea76c941646b7a8b3dd5"
+    name: "IPHONE 13 PRO"
+    price: "55000"
