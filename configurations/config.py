@@ -17,7 +17,7 @@ class Config:
     PATH_TO_FEATURE = pathlib.Path(__file__).parent.parent / "features"
     scenario_file = PATH_TO_FEATURE / "order_transaction.feature"
 
-   # Set Path to Data Files
+    # Set Path to Data Files
     PATH_TO_DATA = pathlib.Path(__file__).parent.parent / "data"
     json_config = PATH_TO_DATA / "credentials.json"
     yaml_config = PATH_TO_DATA / "config.yaml"

@@ -32,7 +32,7 @@ class ForgotPassword(PageObject):
         Args:
             email (str): The email address of the user to enter the forgotten password.
             new_password (str): The new password to enter the forgotten password.
-            password_confirmation (str): The confirmation password to enter the forgotten password. Allows for broader testing
+            password_confirmation (str): The confirmation password to enter the forgotten password.
         """
         self.email_field.fill(email)
         self.password_field.fill(new_password)
