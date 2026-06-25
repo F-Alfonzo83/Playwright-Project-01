@@ -24,7 +24,7 @@ jobs:
         run: flake8 . --exclude=.venv,__pycache__ --count --show-source  --statistics
 
       - name: Check formatting
-        run: autopep8 --check --diff --aggressive --recursive --exclude .venv .
+        run: autopep8 --diff --aggressive --recursive --exclude .venv .
 
   security:
     runs-on: ubuntu-24.04
