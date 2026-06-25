@@ -1,0 +1,71 @@
+name: Continuous Integration Pipeline v01
+
+on:
+  push: #This is executed on PUSH events
+    branches:
+      - master
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install flake8
+        run: pip install flake8
+
+      - name: Run lint
+        run: flake8 . --exclude=.venv,__pycache__ --count --show-source  --statistics
+
+  security:
+    runs-on: ubuntu-24.04
+    needs: lint # This means it will only run if  LINT has passed.
+    steps:
+      - name: Checkout  Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      -  name: Install Security Tool
+         run: pip install bandit pip-audit
+
+      - name: Scan the code for Vulnerabilities
+        run: bandit -r . --exclude ./.venv
+
+      - name: Audit dependencies
+        run: pip-audit -r requirements.txt
+
+  tests:
+    runs-on: ubuntu-24.04
+    needs: security
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install Playwright Browsers
+        run: playwright install --with-deps chromium
+
+      - name: Write Credentials
+        env:
+          CREDENTIALS_JSON: ${{ secrets.CREDENTIALS_JSON }}
+        run: echo "$CREDENTIALS_JSON" > data/credentials.json
+
+      - name: Run tests
+        run: pytest
