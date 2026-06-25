@@ -1,5 +1,3 @@
-from playwright.sync_api import expect
-from configurations.config import Config
 from page_objects.order_history import OrderHistory
 from page_objects.page_object_base import PageObject
 from page_objects.product_details import ProductDetails
@@ -8,7 +6,6 @@ from page_objects.product_details import ProductDetails
 class DashboadPage(PageObject):
     """Page Object Model  for the Dashboard page."""
     def __init__(self, page, logger):
-        super().__init__(page, logger)
         """Initialize the Dashboard Page Object.
 
         Args:
@@ -19,7 +16,8 @@ class DashboadPage(PageObject):
             self.orders_btn (Playwright  selector button): Points to the orders  button
         """
 
-        self.config = Config()
+        super().__init__(page, logger)
+
         self.product_cards =  self.page.locator("section#products>div.container div.row div.card")
         self.orders_btn = self.page.get_by_role("button", name="ORDERS")
 

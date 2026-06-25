@@ -1,3 +1,5 @@
+import re
+
 import playwright
 from playwright.sync_api import expect
 
@@ -9,12 +11,15 @@ class RegistrationPage(PageObject):
 
     Serves as the base of operation for actions that can be executed on the registration page"""
     def __init__(self, page, logger) -> None:
-        super().__init__(page, logger)
         """Constructor for RegistrationPage
 
         Args:
             page (playwright.page.Page): Page Object Model
         """
+        super().__init__(page, logger)
+        #Page Constants
+        self.PAGE_URL = re.compile(r"/client/#/auth/register")
+        self.PAGE_INDICATOR = self.page.get_by_role("heading", name="Register")
         #Registration Form Fields:
         self.first_name_field= self.page.get_by_placeholder("First Name")
         self.last_name_field= self.page.get_by_placeholder("Last Name")
@@ -22,19 +27,6 @@ class RegistrationPage(PageObject):
         self.phone_number_field = self.page.get_by_placeholder("enter your number")
         self.password_field= self.page.get_by_role("textbox", name="Passsword")
         self.confirm_password_field= self.page.get_by_placeholder("Confirm Passsword")
-
-
-    def should_be_open(self):
-        """Hard Validator for Registration page.
-
-        Validates that the page loads with correct heading and url.
-        Breaks in case of assertion error
-
-        Raises:
-            playwright.exceptions.AssertionError in case an assertion error occurs
-        """
-        expect(self.page.get_by_role("heading", name="Register")).to_be_visible()
-        expect(self.page).to_have_url("https://rahulshettyacademy.com/client/#/auth/register")
 
     def should_show_registration_form(self):
         """Soft validator for the Registration Page.

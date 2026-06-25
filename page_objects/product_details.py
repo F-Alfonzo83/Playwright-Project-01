@@ -1,10 +1,10 @@
-from page_objects.page_object_base import PageObject
+import re
 
+from page_objects.page_object_base import PageObject
 
 class ProductDetails(PageObject):
     """Page Object Model for the Product Details  Page"""
     def __init__(self, page, product_name, logger):
-        super().__init__(page, logger)
         """Initialization of the Product Details Page Object.
 
         Args:
@@ -13,20 +13,13 @@ class ProductDetails(PageObject):
         Attributes
             product_id = Unique ID of the item
         """
-        self.page = page
+        super().__init__(page, logger)
+
+        self.PAGE_URL = re.compile(rf"/client/#/dashboard/product-details/.*")
+        self.PAGE_INDICATOR = self.page.get_by_text(re.compile(rf"{product_name}", re.IGNORECASE))
+
         self.product_name = product_name
         self.product_id = self.page.url.split("/")[-1]
-
-    def should_be_open(self):
-        """Validates the Product Details Page is properly opened
-
-        Returns:
-
-        """
-        # Product Name
-        self.page.locator("app-product-details h2").wait_for(state="visible")
-        # Product Price
-        self.page.locator("div.col-lg-6.rtl-text h3").wait_for(state="visible")
 
     def add_item_to_cart(self):
         self.page.get_by_role("button", name = "Add to Cart").click()

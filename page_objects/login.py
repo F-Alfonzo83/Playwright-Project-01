@@ -36,7 +36,7 @@ class LoginPage(PageObject):
         self.password_field = self.page.get_by_role("textbox", name="enter your passsword")
         self.login_button = self.page.get_by_role("button", name="Login")
 
-    def should_show_login_form(self):
+    def validate_form_elements(self):
         """Softly verifies that the login page fields are shown and visible."""
 
         expect.soft(self.email_field).to_be_visible()
@@ -92,7 +92,7 @@ class LoginPage(PageObject):
             forgot_password_page (ForgotPassword): Forgot Password page object.
         """
         self.page.get_by_role("link", name="Forgot password?").click()
-        forgot_password_page = ForgotPassword(self.page)
+        forgot_password_page = ForgotPassword(self.page, self.logger)
         forgot_password_page.should_be_open()
         return forgot_password_page
         

@@ -1,17 +1,27 @@
+import re
+
 from playwright.sync_api import expect
 
-class ForgotPassword:
+from page_objects.page_object_base import PageObject
+class ForgotPassword(PageObject):
     """Page Object Model for the Forgot Password Page."""
-    def __init__(self, page):
-        self.page =  page
+    def __init__(self, page, logger):
+        """Initializer for the Forgot Password Page Object.
+
+        Constains constants as  PAGE_URL and custom arguments that point to POM elements.
+
+        Args:
+            PAGE_URL (str) : The url of the page where the Forgot Password Page will be shown.
+            PAGE_INDICATOR : Aims to a unique element locator that belongs to the page.
+        """
+        super().__init__(page, logger)
+
+        self.PAGE_URL =  re.compile(r".*/client/#/auth/password-new")
+        self.PAGE_INDICATOR = self.page.get_by_role("heading", name="Enter New Password")
+
         self.email_field = self.page.get_by_placeholder("Enter your email address")
         self.password_field = self.page.get_by_role("textbox", name= "Passsword")
         self.confirm_password_field = self.page.get_by_placeholder("Confirm Passsword")
-
-    def should_be_open(self):
-        """Verifies that the Forgot Password page is open."""
-        expect(self.page).to_have_url("https://rahulshettyacademy.com/client/#/auth/password-new")
-        expect(self.page.get_by_role("heading", name="Enter New Password")).to_be_visible()
 
     def fill_form(self, email:str, new_password:str, password_confirmation:str):
         """Fills the forgotten password for with the provided information.
