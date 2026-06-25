@@ -1,0 +1,8 @@
+.venv
+CLAUDE.md
+POM_refactor_checklist.md
+data/credentials.json
+__pycache__
+*.pyc
+.pytest_cache/
+.idea
