@@ -2,6 +2,7 @@ import pathlib
 import json
 import yaml
 
+
 class Config:
     """Loads Configuration files (.yaml and .json)
 
@@ -12,11 +13,11 @@ class Config:
         config.get_test_product_id("adidas original")
     """
 
-    #Set Path for Feature (Gherkin / Cucumber Feature)
+    # Set Path for Feature (Gherkin / Cucumber Feature)
     PATH_TO_FEATURE = pathlib.Path(__file__).parent.parent / "features"
     scenario_file = PATH_TO_FEATURE / "order_transaction.feature"
 
-   #Set Path to Data Files
+   # Set Path to Data Files
     PATH_TO_DATA = pathlib.Path(__file__).parent.parent / "data"
     json_config = PATH_TO_DATA / "credentials.json"
     yaml_config = PATH_TO_DATA / "config.yaml"
@@ -25,7 +26,7 @@ class Config:
     with open(json_config, "r") as json_file:
         credentials = json.load(json_file)
 
-    with open(yaml_config,"r") as yml_file:
+    with open(yaml_config, "r") as yml_file:
         config = yaml.safe_load(yml_file)
 
     with open(test_data, "r", encoding="utf-8") as test_data:
@@ -70,19 +71,19 @@ class Config:
     def get_test_card_names(self):
         return self.data_test["dashboard"]["product_list"]
 
-    def get_test_product_name(self, product_name:str):
+    def get_test_product_name(self, product_name: str):
         return self.data_test["order_details"][product_name.lower()]["name"]
 
-    def get_test_product_price(self, product_name:str):
+    def get_test_product_price(self, product_name: str):
         return self.data_test["order_details"][product_name.lower()]["price"]
 
-    def get_test_product_id(self, product_name:str):
+    def get_test_product_id(self, product_name: str):
         return self.data_test["order_details"][product_name.lower()]["itemid"]
 
 
 if __name__ == "__main__":
     test = Config()
-    email,password = test.get_credentials_main()
+    email, password = test.get_credentials_main()
     print(f"{email},{password}")
     print(test.get_rahul_url_login())
     print(test.get_api_baseurl())

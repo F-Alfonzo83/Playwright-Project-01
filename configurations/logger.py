@@ -5,22 +5,22 @@ def _logger(name):
 
     logger = logging.getLogger(name)
 
-    #Set Logger Level
+    # Set Logger Level
     logger.setLevel(logging.DEBUG)
 
-    #Create Handler
+    # Create Handler
     stream_handler = logging.StreamHandler()
 
-    #Set Logging level for Streamer
+    # Set Logging level for Streamer
     stream_handler.setLevel(logging.DEBUG)
 
-    #Formater
+    # Formater
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-    #Set Formatter
+    # Set Formatter
     stream_handler.setFormatter(formatter)
 
-    #Set Logger Handler
+    # Set Logger Handler
     logger.addHandler(stream_handler)
 
     return logger

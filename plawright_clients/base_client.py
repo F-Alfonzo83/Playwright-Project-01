@@ -1,8 +1,9 @@
 from playwright.sync_api import Playwright
 from configurations.config import Config
 
+
 class BaseClient:
-    def __init__(self,playwright: Playwright, timeout:float=15_000.):
+    def __init__(self, playwright: Playwright, timeout: float = 15_000.):
         '''
         BaseClient() Initializator
         Args:
@@ -19,7 +20,7 @@ class BaseClient:
         self._request = playwright.request.new_context(base_url=self.base_url,
                                                        timeout=self.timeout)
 
-    def _get(self, url: str=None, headers:dict=None, **kwargs):
+    def _get(self, url: str = None, headers: dict = None, **kwargs):
         request_headers = self.headers.copy()
         if headers is not None:
             request_headers.update(headers)
@@ -29,7 +30,7 @@ class BaseClient:
                                      **kwargs)
         return response
 
-    def _post(self, url: str,data:dict, headers:dict=None, **kwargs):
+    def _post(self, url: str, data: dict, headers: dict = None, **kwargs):
         request_headers = self.headers.copy()
         if headers is not None:
             request_headers.update(headers)
@@ -37,5 +38,3 @@ class BaseClient:
                                       headers=request_headers,
                                       data=data)
         return response
-
-

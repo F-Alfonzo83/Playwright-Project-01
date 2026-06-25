@@ -8,6 +8,7 @@ class RegistrationPage(PageObject):
     """Page Object Model for Registration page.
 
     Serves as the base of operation for actions that can be executed on the registration page"""
+
     def __init__(self, page, logger) -> None:
         """Constructor for RegistrationPage
 
@@ -15,16 +16,16 @@ class RegistrationPage(PageObject):
             page (playwright.page.Page): Page Object Model
         """
         super().__init__(page, logger)
-        #Page Constants
+        # Page Constants
         self.PAGE_URL = re.compile(r"/client/#/auth/register")
         self.PAGE_INDICATOR = self.page.get_by_role("heading", name="Register")
-        #Registration Form Fields:
-        self.first_name_field= self.page.get_by_placeholder("First Name")
-        self.last_name_field= self.page.get_by_placeholder("Last Name")
-        self.email_field= self.page.get_by_placeholder("email@example.com")
+        # Registration Form Fields:
+        self.first_name_field = self.page.get_by_placeholder("First Name")
+        self.last_name_field = self.page.get_by_placeholder("Last Name")
+        self.email_field = self.page.get_by_placeholder("email@example.com")
         self.phone_number_field = self.page.get_by_placeholder("enter your number")
-        self.password_field= self.page.get_by_role("textbox", name="Passsword")
-        self.confirm_password_field= self.page.get_by_placeholder("Confirm Passsword")
+        self.password_field = self.page.get_by_role("textbox", name="Passsword")
+        self.confirm_password_field = self.page.get_by_placeholder("Confirm Passsword")
 
     def should_show_registration_form(self):
         """Soft validator for the Registration Page.
@@ -51,11 +52,11 @@ class RegistrationPage(PageObject):
         self.should_show_registration_form()
 
     def fill_form(self,
-                  first_name:str=None,
-                  last_name:str=None,
-                  email:str=None,
-                  phone_number:str=None,
-                  password:str=None):
+                  first_name: str = None,
+                  last_name: str = None,
+                  email: str = None,
+                  phone_number: str = None,
+                  password: str = None):
         """Fills the registration page with data
 
         Args:
@@ -74,7 +75,7 @@ class RegistrationPage(PageObject):
         self.password_field.fill(password)
         self.confirm_password_field.fill(password)
         #  Select Radio male or female
-        self.page.get_by_role("radio",name="Male", exact=True).check()
+        self.page.get_by_role("radio", name="Male", exact=True).check()
         # Check the Checkbox
         self.page.get_by_role("checkbox").check()
 
@@ -103,8 +104,3 @@ class RegistrationPage(PageObject):
             playwright.exceptions.AssertionError in case an assertion error occurs
         """
         expect(self.page.get_by_role("alert")).to_be_visible()
-
-
-
-
-

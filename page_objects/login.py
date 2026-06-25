@@ -9,11 +9,13 @@ from page_objects.registration import RegistrationPage
 
 config = Config()
 
+
 class LoginPage(PageObject):
     """Page Object Model for the Login Page.
 
     Contains a  list of interactive elements for easier use  and access
     """
+
     def __init__(self, page, logger):
         """Initializes the Login Page: Child of PageObject.
 
@@ -27,11 +29,11 @@ class LoginPage(PageObject):
         """
         super().__init__(page, logger)
 
-        #Constants
+        # Constants
         self.PAGE_URL = re.compile(r".*/client/#/auth/login")
-        self.PAGE_INDICATOR = self.page.get_by_role("heading", name= "Log in")
+        self.PAGE_INDICATOR = self.page.get_by_role("heading", name="Log in")
 
-        #Page Interactive Required Elements.
+        # Page Interactive Required Elements.
         self.email_field = self.page.get_by_role("textbox", name="email@example.com")
         self.password_field = self.page.get_by_role("textbox", name="enter your passsword")
         self.login_button = self.page.get_by_role("button", name="Login")
@@ -47,7 +49,7 @@ class LoginPage(PageObject):
         self.logger.info("Navigating to the login page")
         self.page.goto(config.get_rahul_url_login())
 
-    def fill_form(self,username,password):
+    def fill_form(self, username, password):
         """Fills the login page with username and password.
 
         Args
@@ -95,6 +97,3 @@ class LoginPage(PageObject):
         forgot_password_page = ForgotPassword(self.page, self.logger)
         forgot_password_page.should_be_open()
         return forgot_password_page
-        
-        
-

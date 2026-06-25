@@ -3,8 +3,11 @@ import re
 from playwright.sync_api import expect
 
 from page_objects.page_object_base import PageObject
+
+
 class ForgotPassword(PageObject):
     """Page Object Model for the Forgot Password Page."""
+
     def __init__(self, page, logger):
         """Initializer for the Forgot Password Page Object.
 
@@ -16,14 +19,14 @@ class ForgotPassword(PageObject):
         """
         super().__init__(page, logger)
 
-        self.PAGE_URL =  re.compile(r".*/client/#/auth/password-new")
+        self.PAGE_URL = re.compile(r".*/client/#/auth/password-new")
         self.PAGE_INDICATOR = self.page.get_by_role("heading", name="Enter New Password")
 
         self.email_field = self.page.get_by_placeholder("Enter your email address")
-        self.password_field = self.page.get_by_role("textbox", name= "Passsword")
+        self.password_field = self.page.get_by_role("textbox", name="Passsword")
         self.confirm_password_field = self.page.get_by_placeholder("Confirm Passsword")
 
-    def fill_form(self, email:str, new_password:str, password_confirmation:str):
+    def fill_form(self, email: str, new_password: str, password_confirmation: str):
         """Fills the forgotten password for with the provided information.
 
         Args:
@@ -37,9 +40,8 @@ class ForgotPassword(PageObject):
 
     def submit_form(self):
         """Submits the form"""
-        #Click Save Password
+        # Click Save Password
         self.page.get_by_role("button", name="Save New Password").click()
 
     def validate_error(self):
         expect(self.page.get_by_text("Password and Confirm Password must match with each other.")).to_be_visible()
-

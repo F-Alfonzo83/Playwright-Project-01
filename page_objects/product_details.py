@@ -2,8 +2,10 @@ import re
 
 from page_objects.page_object_base import PageObject
 
+
 class ProductDetails(PageObject):
     """Page Object Model for the Product Details  Page"""
+
     def __init__(self, page, product_name, logger):
         """Initialization of the Product Details Page Object.
 
@@ -22,7 +24,7 @@ class ProductDetails(PageObject):
         self.product_id = self.page.url.split("/")[-1]
 
     def add_item_to_cart(self):
-        self.page.get_by_role("button", name = "Add to Cart").click()
+        self.page.get_by_role("button", name="Add to Cart").click()
         buy_toaster = self.page.get_by_role("alert", name="Product Added To Cart")
         # Toaster Shows
         buy_toaster.wait_for(state="visible", timeout=60000)

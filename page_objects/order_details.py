@@ -4,8 +4,9 @@ from playwright.sync_api import expect
 
 from page_objects.page_object_base import PageObject
 
+
 class OrderDetails(PageObject):
-    def __init__(self, page, logger, order_id:str):
+    def __init__(self, page, logger, order_id: str):
         self.order_id = order_id
         super().__init__(page, logger)
 

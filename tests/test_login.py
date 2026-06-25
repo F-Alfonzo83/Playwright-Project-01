@@ -2,7 +2,7 @@ from configurations.config import Config
 from page_objects.login import LoginPage
 
 config = Config()
-user_mail,user_pass = config.get_credentials_main()
+user_mail, user_pass = config.get_credentials_main()
 
 
 def test_login_user(browser_instance, session_logger):
@@ -20,6 +20,7 @@ def test_forgot_password(browser_instance, session_logger):
     forgot_password_page.should_be_open()
     forgot_password_page.fill_form(email=user_mail, new_password=user_pass, password_confirmation=user_pass)
     forgot_password_page.submit_form()
+
 
 def test_negative_forgot_password_not_match(browser_instance, session_logger):
     login_page = LoginPage(browser_instance, session_logger)
