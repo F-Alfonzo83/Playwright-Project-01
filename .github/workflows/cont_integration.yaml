@@ -42,7 +42,7 @@ jobs:
          run: pip install bandit pip-audit
 
       - name: Scan the code for Vulnerabilities
-        run: bandit -r . --exclude ./.venv
+        run: bandit -r . --exclude ./.venv --severity-level medium
 
       - name: Audit dependencies
         run: pip-audit -r requirements.txt

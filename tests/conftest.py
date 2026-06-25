@@ -44,9 +44,3 @@ def dashboard_page(browser_instance):
     dashboard_page = login_page.submit_login()
     dashboard_page.should_be_open()
     yield dashboard_page
-
-
-@pytest.fixture(scope="session")
-def session_logger():
-    logger = _logger(__name__)
-    yield logger

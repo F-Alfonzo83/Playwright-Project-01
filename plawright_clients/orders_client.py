@@ -17,7 +17,8 @@ class OrdersClient(BaseClient):
         place_order = self._post(url="api/ecom/order/create-order",
                                  data=PAYLOAD,
                                  headers={"Authorization": token})
-        assert place_order.ok
-        orderId = place_order.json()["orders"][0]
-        print(f"Created Order ID: {orderId}")
-        return orderId
+        if not place_order.ok:
+            raise ValueError(f"Login failed with status code {place_order.status_code}")
+        order_id = place_order.json()["orders"][0]
+        print(f"Created Order ID: {order_id}")
+        return order_id

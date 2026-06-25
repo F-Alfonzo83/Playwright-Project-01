@@ -7,5 +7,6 @@ class AuthClient(BaseClient):
         response = self._post(url="api/ecom/auth/login",
                               data={"userEmail": email,
                                     "userPassword": password})
-        assert response.ok
+        if not response.ok:
+            raise ValueError(f"Login failed with status code {response.status_code}")
         return response.json()["token"]
