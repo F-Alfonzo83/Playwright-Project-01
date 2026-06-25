@@ -1,6 +1,7 @@
 from playwright.sync_api import Playwright
 from pytest_bdd import given, when, then, parsers, scenarios
 from configurations.config import Config
+from configurations.logger import _logger
 from page_objects.dashboard import DashboadPage
 from page_objects.login import LoginPage
 from page_objects.order_details import OrderDetails
@@ -8,6 +9,7 @@ from page_objects.order_history import OrderHistory
 from plawright_clients.orders_client import OrdersClient
 from dataclasses import dataclass
 
+logger = _logger(__name__)
 scenarios(str(Config.scenario_file))
 
 # APPROACH USING A DATACLASS
@@ -33,7 +35,7 @@ def place_item_order(playwright: Playwright, username: str, password: str):
 
 @given("the user is on the landing page")
 def user_is_on_landing_page(browser_instance):
-    login_page = LoginPage(browser_instance)  # Here you pass the fixture. It returns the page.
+    login_page = LoginPage(browser_instance, logger)  # Here you pass the fixture. It returns the page.
     login_page.navigate()  # This will take you to the login page.
     OrderTransaction.login_page = login_page
 
