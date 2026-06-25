@@ -1,6 +1,4 @@
 import re
-
-import playwright
 from playwright.sync_api import expect
 
 from page_objects.page_object_base import PageObject

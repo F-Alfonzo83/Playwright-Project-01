@@ -1,4 +1,3 @@
-import playwright
 from playwright.sync_api import Playwright
 from configurations.config import Config
 
