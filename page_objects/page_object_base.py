@@ -1,6 +1,4 @@
-import playwright
 from playwright.sync_api import expect
-
 
 class PageObject:
     def __init__(self, page, logger):

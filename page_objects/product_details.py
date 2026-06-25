@@ -15,7 +15,7 @@ class ProductDetails(PageObject):
         """
         super().__init__(page, logger)
 
-        self.PAGE_URL = re.compile(rf"/client/#/dashboard/product-details/.*")
+        self.PAGE_URL = re.compile(r"/client/#/dashboard/product-details/.*")
         self.PAGE_INDICATOR = self.page.get_by_text(re.compile(rf"{product_name}", re.IGNORECASE))
 
         self.product_name = product_name
