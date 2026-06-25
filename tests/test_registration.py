@@ -1,10 +1,7 @@
-import pytest
 from playwright.sync_api import Playwright
 from page_objects.login import LoginPage
 
-
-def \
-        test_register_user(playwright: Playwright,browser_instance):
+def test_register_user(playwright: Playwright,browser_instance):
     login_page = LoginPage(browser_instance)
     login_page.navigate()
     register_page =login_page.register_new()

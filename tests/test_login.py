@@ -1,5 +1,3 @@
-from playwright.sync_api import Playwright
-
 from configurations.config import Config
 from page_objects.login import LoginPage
 

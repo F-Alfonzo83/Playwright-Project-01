@@ -1,4 +1,3 @@
-from playwright.sync_api import Playwright
 from plawright_clients.base_client import BaseClient
 
 class AuthClient(BaseClient):

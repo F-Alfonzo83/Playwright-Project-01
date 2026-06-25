@@ -1,6 +1,4 @@
 import pytest
-from playwright.sync_api import Playwright
-
 from configurations.config import Config
 
 config = Config()
